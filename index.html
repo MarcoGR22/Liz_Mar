@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Quieres ser mi San Valentín? ❤️</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      overflow-x: hidden; 
+      overflow-y: auto;
+      min-height: 100vh;
+      animation: bgChange 20s ease-in-out infinite;
+    }
+
+    @keyframes bgChange {
+      0% { background: linear-gradient(135deg, #ffdde1, #ee9ca7); }
+      50% { background: linear-gradient(135deg, #ffd6e8, #ff9a9e); }
+      100% { background: linear-gradient(135deg, #ffdde1, #ee9ca7); }
+    }
+
+    .screen {
+      width: 100vw;
+      min-height: 100vh;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .active { display: flex; }
+
+    h1 { color: #b30059; font-size: 2.2em; margin: 20px 0; }
+    p { color: #6b0033; font-size: 18px; max-width: 600px; }
+
+    button {
+      padding: 15px 28px;
+      margin: 10px;
+      border: none;
+      border-radius: 30px;
+      font-size: 18px;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      color: white;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+      transition: transform .3s;
+      z-index: 10;
+    }
+
+    button:hover { transform: scale(1.1); }
+
+    .buttons {
+      position: relative;
+      width: 100%;
+      min-height: 250px;
+    }
+
+    .image-container {
+      margin: 20px 0;
+      width: 250px;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      border: 5px solid white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    #btnSi {
+      position: absolute;
+      background: #ff5fa2;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, -50%);
+    }
+
+    #btnNo {
+      background: #4CAF50;
+      color: white;
+      position: absolute;
+      left: 50%;
+      top: 40%;
+      transform: translate(-50%, 80px);
+    }
+
+    .photo-strip {
+      position: absolute;
+      top: 20px;
+      width: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      opacity: 0.6;
+    }
+
+    .left { left: 10px; }
+    .right { right: 10px; }
+
+    .photo-strip img {
+      width: 100%;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 3px solid white;
+    }
+
+    .gallery {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .gallery img {
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 15px;
+      border: 4px solid white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    .letter {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 25px;
+      border-radius: 20px;
+      max-width: 90%;
+      color: #800040;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+
+    .secret {
+      display: none;
+      margin: 20px 0;
+      color: #b30059;
+      font-weight: bold;
+      background: white;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    /* ESTILOS DEL MAPA ACTUALIZADOS */
+    .map-container {
+      width: 90%;
+      max-width: 500px;
+      height: 300px;
+      background: #fff;
+      border-radius: 25px;
+      box-shadow: 0 10px 25px rgba(0,0,0,.2);
+      margin: 20px 0;
+      overflow: hidden;
+      border: 5px solid white;
+    }
+
+    @media (max-width: 600px) {
+      .photo-strip { display: none; }
+      h1 { font-size: 1.8em; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="screen active" id="screen1">
+  <h1>¿Ya tienes pareja de San Valentín? 💘</h1>
+  <div class="image-container">
+    <img id="reactionImage" src="feliz.gif" alt="Reacción">
+  </div>
+  <div class="buttons">
+    <button id="btnSi">Sí</button>
+    <button id="btnNo" onclick="goToScreen(2)">No</button>
+  </div>
+</div>
+
+<div class="screen" id="screen2">
+  <div class="photo-strip left">
+    <img src="1.jpeg" alt="1"><img src="2.jpeg" alt="2"><img src="3.jpeg" alt="3">
+  </div>
+
+  <h1>¿Quieres ser mi San Valentín? 💖</h1>
+
+  <div class="gallery">
+    <img src="4.jpeg" alt="4"><img src="5.jpeg" alt="5"><img src="6.jpeg" alt="6">
+  </div>
+
+  <div class="letter">
+    <p>Desde que estoy contigo nada puede ser más bonito.<br>
+    Te amo como no imaginas, gracias por ser 7 años consecutivos mi valentín, espero quieras serlo siempre.</p>
+  </div>
+
+  <div class="buttons-screen2">
+    <button onclick="accepted()">Sí 💕</button>
+    <button onclick="accepted()">Obvio sí</button>
+    <button onclick="accepted()">Contigo siempre</button>
+    <button style="background: #ccc; color: #333;" onclick="fakeNo()">No</button>
+  </div>
+
+  <div class="secret" id="secret">🧸 Mensaje secreto: Siempre serás mi lugar seguro</div>
+
+  <div class="photo-strip right">
+    <img src="7.jpeg" alt="7"><img src="8.jpeg" alt="8"><img src="9.jpeg" alt="9">
+  </div>
+</div>
+
+<div class="screen" id="screen3">
+  <h1>💌 ¡Sabía que dirías que sí! 💌</h1>
+  <div class="letter">
+    <p>Gracias por aceptar ser mi San Valentín 💖<br><br>
+    Te espero para una cita especial llena de sonrisas, amor y momentos bonitos 🌹✨</p>
+  </div>
+  
+  <div class="map-container">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.4286460021954!2d-99.16340123078966!3d19.35058385929508!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ffc343743d3f%3A0x1f390950e03134f1!2sCjon.%20Belisario%20Dom%C3%ADnguez%2017%2C%20Coyoac%C3%A1n%2C%2004100%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1770957806320!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" 
+      width="100%" 
+      height="100%" 
+      style="border:0;" 
+      allowfullscreen="" 
+      loading="lazy">
+    </iframe>
+  </div>
+
+  <p style="margin-top: 20px; font-size: 20px; font-weight: bold;">📍 Aquí será nuestra cita de un gran día 🌹</p>
+</div>
+
+<audio id="music" loop><source src="musica.mp3" type="audio/mpeg"></audio>
+
+<script>
+  const btnSi = document.getElementById("btnSi");
+  const btnNo = document.getElementById("btnNo");
+  const reactionImage = document.getElementById("reactionImage");
+
+  let noScale = 1;
+  let clickCount = 0;
+  const mensajes = ["¿Estás segura? 🤨", "Piénsalo bien… 💭", "¿Segurísima? 😳", "Opción incorrecta 😅", "Intenta otra vez 💖"];
+  const imagenes = ["feliz.gif", "conejin.gif", "manzan.gif", "murci.gif", "patric.gif", "puerc.gif"];
+
+  function moverBotonSi() {
+    const maxX = window.innerWidth - btnSi.offsetWidth - 20;
+    const maxY = 300; 
+    btnSi.style.left = Math.random() * maxX + "px";
+    btnSi.style.top = Math.random() * maxY + "px";
+  }
+
+  btnSi.addEventListener("click", () => {
+    if (clickCount < 5) {
+      btnSi.textContent = mensajes[clickCount];
+      clickCount++;
+      reactionImage.src = imagenes[clickCount];
+      noScale += 0.2;
+      btnNo.style.transform = `translate(-50%, 80px) scale(${noScale})`;
+    }
+  });
+
+  btnSi.addEventListener("mouseenter", () => { if (clickCount >= 5) moverBotonSi(); });
+
+  function goToScreen(n) {
+    document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+    document.getElementById("screen" + n).classList.add("active");
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (n === 2) {
+      const music = document.getElementById("music");
+      if (music) { music.volume = 0.2; music.play().catch(() => {}); }
+      setTimeout(() => { document.getElementById("secret").style.display = "block"; }, 8000);
+    }
+  }
+
+  function accepted() { goToScreen(3); }
+  function fakeNo() { alert("El universo no permite esa opción 😌💖"); }
+</script>
+
+</body>
+</html>
